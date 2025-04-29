@@ -295,7 +295,7 @@ begin
   inherited;
   FSecondTexture := TALTexture.Create;
   {$IF not defined(ALDPK)}
-  Material := ALGetDef420YpCbCr8BiPlanarVideoRangeMaterial;
+//  Material := ALGetDef420YpCbCr8BiPlanarVideoRangeMaterial;
   {$ENDIF}
 end;
 
@@ -313,7 +313,7 @@ begin
   FSecondTexture := TALTexture.Create;
   FThirdTexture := TALTexture.Create;
   {$IF not defined(ALDPK)}
-  Material := ALGetDef420YpCbCr8PlanarMaterial;
+//  Material := ALGetDef420YpCbCr8PlanarMaterial;
   {$ENDIF}
 end;
 

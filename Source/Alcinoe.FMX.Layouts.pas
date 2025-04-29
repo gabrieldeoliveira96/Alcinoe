@@ -117,7 +117,7 @@ type
         FScrollBox: TALCustomScrollBox;
       protected
         procedure DoContentChanged; override;
-        {$IFNDEF ALDPK}
+        {$IFDEF ALDPK}
         function IsVisibleObject(const AObject: TControl): Boolean; override;
         {$ENDIF}
       public
@@ -290,7 +290,7 @@ type
     procedure MouseMove(Shift: TShiftState; X, Y: Single); override;
     procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Single); override;
     procedure DoMouseLeave; override;
-    {$IFNDEF ALDPK}
+    {$IFDEF ALDPK}
     procedure ChildrenMouseDown(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single); override;
     procedure ChildrenMouseMove(const AObject: TControl; Shift: TShiftState; X, Y: Single); override;
     procedure ChildrenMouseUp(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single); override;
@@ -613,7 +613,7 @@ begin
 end;
 
 {*************}
-{$IFNDEF ALDPK}
+{$IFDEF ALDPK}
 function TALCustomScrollBox.TContent.IsVisibleObject(const AObject: TControl): Boolean;
 begin
   if AObject.Visible then begin
@@ -1255,7 +1255,7 @@ begin
 end;
 
 {*************}
-{$IFNDEF ALDPK}
+{$IFDEF ALDPK}
 procedure TALCustomScrollBox.ChildrenMouseDown(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
   if not aObject.AutoCapture then begin
@@ -1273,7 +1273,7 @@ end;
 {$ENDIF}
 
 {*************}
-{$IFNDEF ALDPK}
+{$IFDEF ALDPK}
 procedure TALCustomScrollBox.ChildrenMouseMove(const AObject: TControl; Shift: TShiftState; X, Y: Single);
 begin
   var P := AbsoluteToLocal(AObject.LocalToAbsolute(TpointF.Create(X, Y)));
@@ -1283,7 +1283,7 @@ end;
 {$ENDIF}
 
 {*************}
-{$IFNDEF ALDPK}
+{$IFDEF ALDPK}
 procedure TALCustomScrollBox.ChildrenMouseUp(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
   if not aObject.AutoCapture then begin
@@ -1301,7 +1301,7 @@ end;
 {$ENDIF}
 
 {*************}
-{$IFNDEF ALDPK}
+{$IFDEF ALDPK}
 procedure TALCustomScrollBox.ChildrenMouseLeave(const AObject: TControl);
 begin
   InternalMouseLeave;
