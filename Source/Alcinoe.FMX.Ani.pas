@@ -912,8 +912,8 @@ begin
   if assigned(FTimerEvent) then
     FTimerEvent(Self);
 
-  if Enabled then
-    TChoreographer.Instance.PostAniFrameCallback(doFrame);
+//  if Enabled then
+//    TChoreographer.Instance.PostAniFrameCallback(doFrame);
 
 end;
 
@@ -933,7 +933,7 @@ begin
   if TThread.Current.ThreadID <> MainThreadID then
     raise Exception.Create('TALChoreographerThread.Destroy must only be called from the main thread.');
   {$ENDIF}
-  TChoreographer.Instance.RemoveAniFrameCallback(doFrame);
+//  TChoreographer.Instance.RemoveAniFrameCallback(doFrame);
   inherited;
 end;
 
@@ -946,8 +946,8 @@ begin
     if TThread.Current.ThreadID <> MainThreadID then
       raise Exception.Create('TALChoreographerThread.SetEnabled must only be called from the main thread.');
     {$ENDIF}
-    if FEnabled then TChoreographer.Instance.PostAniFrameCallback(doFrame)
-    else TChoreographer.Instance.RemoveAniFrameCallback(doFrame);
+//    if FEnabled then TChoreographer.Instance.PostAniFrameCallback(doFrame)
+//    else TChoreographer.Instance.RemoveAniFrameCallback(doFrame);
   end;
 end;
 

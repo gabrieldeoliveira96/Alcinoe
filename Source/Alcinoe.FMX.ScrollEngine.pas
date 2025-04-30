@@ -2568,8 +2568,8 @@ begin
   {$ENDIF}
   if not Calculate then
     StopTimer
-  else
-    TChoreographer.Instance.PostAniFrameCallback(doFrame);
+//  else
+//    TChoreographer.Instance.PostAniFrameCallback(doFrame);
 end;
 
 {$ENDIF}
@@ -2804,7 +2804,7 @@ begin
   if TThread.Current.ThreadID <> MainThreadID then
     raise Exception.Create('TALScrollEngine.StartTimer must only be called from the main thread.');
   {$ENDIF}
-  TChoreographer.Instance.PostAniFrameCallback(DoFrame);
+//  TChoreographer.Instance.PostAniFrameCallback(DoFrame);
   {$ELSE}
   if FTimerHandle = TFmxHandle(-1) then begin
     InitPlatformTimer;
@@ -2832,7 +2832,7 @@ begin
   if TThread.Current.ThreadID <> MainThreadID then
     raise Exception.Create('TALScrollEngine.StopTimer must only be called from the main thread.');
   {$ENDIF}
-  TChoreographer.Instance.RemoveAniFrameCallback(DoFrame);
+//  TChoreographer.Instance.RemoveAniFrameCallback(DoFrame);
   {$ELSE}
   if FTimerHandle <> TFmxHandle(-1) then begin
     InitPlatformTimer;
@@ -3146,27 +3146,27 @@ begin
   if (AHandle = nil) or (not TouchEnabled) then exit;
 
   {$IF defined(ANDROID)}
-  var LTmpCurrentMotionEvent := WindowHandleToPlatform(AHandle).CurrentMotionEvent;
-  if LTmpCurrentMotionEvent = nil then begin
+//  var LTmpCurrentMotionEvent := WindowHandleToPlatform(AHandle).CurrentMotionEvent;
+//  if LTmpCurrentMotionEvent = nil then begin
     {$IF defined(DEBUG)}
-    ALLog('Alcinoe.FMX.ScrollEngine.TALScrollEngine.MouseDown', 'CurrentMotionEvent is nil', TALLogType.ERROR);
+//    ALLog('Alcinoe.FMX.ScrollEngine.TALScrollEngine.MouseDown', 'CurrentMotionEvent is nil', TALLogType.ERROR);
     {$ENDIF}
-    exit;
-  end;
-  var LCurrentMotionEvent := TJALMotionEvent.wrap(LTmpCurrentMotionEvent);
-  if (LCurrentMotionEvent.getPointerCount = 0) or
-     (LCurrentMotionEvent.getActionMasked <> AMOTION_EVENT_ACTION_DOWN) then exit;
+//    exit;
+//  end;
+//  var LCurrentMotionEvent := TJALMotionEvent.wrap(LTmpCurrentMotionEvent);
+//  if (LCurrentMotionEvent.getPointerCount = 0) or
+//     (LCurrentMotionEvent.getActionMasked <> AMOTION_EVENT_ACTION_DOWN) then exit;
   //--
-  var LMovement: TMovement;
-  if TOSVersion.Check(14) {API level >= 34 (UPSIDE_DOWN_CAKE)} then
-    LMovement.eventTime := LCurrentMotionEvent.getEventTimeNanos
-  else
-    LMovement.eventTime := LCurrentMotionEvent.getEventTime*ALNanosPerMs;
-  LMovement.position := PlatformAndroid.WindowService.PixelToPoint(
-                          TPointF.Create(
-                            LCurrentMotionEvent.getX(0),
-                            LCurrentMotionEvent.getY(0)));
-  FMovements.Add(LMovement);
+//  var LMovement: TMovement;
+//  if TOSVersion.Check(14) {API level >= 34 (UPSIDE_DOWN_CAKE)} then
+//    LMovement.eventTime := LCurrentMotionEvent.getEventTimeNanos
+//  else
+//    LMovement.eventTime := LCurrentMotionEvent.getEventTime*ALNanosPerMs;
+//  LMovement.position := PlatformAndroid.WindowService.PixelToPoint(
+//                          TPointF.Create(
+//                            LCurrentMotionEvent.getX(0),
+//                            LCurrentMotionEvent.getY(0)));
+//  FMovements.Add(LMovement);
   {$ENDIF}
 
   {$IF defined(IOS)}
@@ -3290,40 +3290,40 @@ begin
   if (AHandle = nil) or (not fDown) then exit;
 
   {$IF defined(ANDROID)}
-  var LTmpCurrentMotionEvent := WindowHandleToPlatform(AHandle).CurrentMotionEvent;
-  if LTmpCurrentMotionEvent = nil then begin
+//  var LTmpCurrentMotionEvent := WindowHandleToPlatform(AHandle).CurrentMotionEvent;
+//  if LTmpCurrentMotionEvent = nil then begin
     {$IF defined(DEBUG)}
-    ALLog('Alcinoe.FMX.ScrollEngine.TALScrollEngine.MouseMove', 'CurrentMotionEvent is nil', TALLogType.ERROR);
+//    ALLog('Alcinoe.FMX.ScrollEngine.TALScrollEngine.MouseMove', 'CurrentMotionEvent is nil', TALLogType.ERROR);
     {$ENDIF}
-    exit;
-  end;
-  var LCurrentMotionEvent := TJALMotionEvent.wrap(LTmpCurrentMotionEvent);
-  if (LCurrentMotionEvent.getPointerCount = 0) or
-     (LCurrentMotionEvent.getActionMasked <> AMOTION_EVENT_ACTION_MOVE) then exit;
+//    exit;
+//  end;
+//  var LCurrentMotionEvent := TJALMotionEvent.wrap(LTmpCurrentMotionEvent);
+//  if (LCurrentMotionEvent.getPointerCount = 0) or
+//     (LCurrentMotionEvent.getActionMasked <> AMOTION_EVENT_ACTION_MOVE) then exit;
   //--
-  for var I := 0 to LCurrentMotionEvent.getHistorySize - 1 do begin
-    var LMovement: TMovement;
-    if TOSVersion.Check(14) {API level >= 34 (UPSIDE_DOWN_CAKE)} then
-      LMovement.eventTime := LCurrentMotionEvent.getHistoricalEventTimeNanos(I)
-    else
-      LMovement.eventTime := LCurrentMotionEvent.getHistoricalEventTime(I)*ALNanosPerMs;
-    LMovement.position := PlatformAndroid.WindowService.PixelToPoint(
-                            TPointF.Create(
-                              LCurrentMotionEvent.getHistoricalX(0, I),
-                              LCurrentMotionEvent.getHistoricalY(0, I)));
-    FMovements.Add(LMovement);
-  end;
+//  for var I := 0 to LCurrentMotionEvent.getHistorySize - 1 do begin
+//    var LMovement: TMovement;
+//    if TOSVersion.Check(14) {API level >= 34 (UPSIDE_DOWN_CAKE)} then
+//      LMovement.eventTime := LCurrentMotionEvent.getHistoricalEventTimeNanos(I)
+//    else
+//      LMovement.eventTime := LCurrentMotionEvent.getHistoricalEventTime(I)*ALNanosPerMs;
+//    LMovement.position := PlatformAndroid.WindowService.PixelToPoint(
+//                            TPointF.Create(
+//                              LCurrentMotionEvent.getHistoricalX(0, I),
+//                              LCurrentMotionEvent.getHistoricalY(0, I)));
+//    FMovements.Add(LMovement);
+//  end;
   //--
   var LMovement: TMovement;
-  if TOSVersion.Check(14) {API level >= 34 (UPSIDE_DOWN_CAKE)} then
-    LMovement.eventTime := LCurrentMotionEvent.getEventTimeNanos
-  else
-    LMovement.eventTime := LCurrentMotionEvent.getEventTime*ALNanosPerMs;
-  LMovement.position := PlatformAndroid.WindowService.PixelToPoint(
-                          TPointF.Create(
-                            LCurrentMotionEvent.getX(0),
-                            LCurrentMotionEvent.getY(0)));
-  FMovements.Add(LMovement);
+//  if TOSVersion.Check(14) {API level >= 34 (UPSIDE_DOWN_CAKE)} then
+//    LMovement.eventTime := LCurrentMotionEvent.getEventTimeNanos
+//  else
+//    LMovement.eventTime := LCurrentMotionEvent.getEventTime*ALNanosPerMs;
+//  LMovement.position := PlatformAndroid.WindowService.PixelToPoint(
+//                          TPointF.Create(
+//                            LCurrentMotionEvent.getX(0),
+//                            LCurrentMotionEvent.getY(0)));
+//  FMovements.Add(LMovement);
   {$ENDIF}
 
   {$IF defined(IOS)}
@@ -3468,27 +3468,27 @@ begin
   if (AHandle = nil) or (not Fdown) then exit;
 
   {$IF defined(ANDROID)}
-  var LTmpCurrentMotionEvent := WindowHandleToPlatform(AHandle).CurrentMotionEvent;
-  if LTmpCurrentMotionEvent = nil then begin
+//  var LTmpCurrentMotionEvent := WindowHandleToPlatform(AHandle).CurrentMotionEvent;
+//  if LTmpCurrentMotionEvent = nil then begin
     {$IF defined(DEBUG)}
-    ALLog('Alcinoe.FMX.ScrollEngine.TALScrollEngine.MouseUp', 'CurrentMotionEvent is nil', TALLogType.ERROR);
+//    ALLog('Alcinoe.FMX.ScrollEngine.TALScrollEngine.MouseUp', 'CurrentMotionEvent is nil', TALLogType.ERROR);
     {$ENDIF}
-    exit;
-  end;
-  var LCurrentMotionEvent := TJALMotionEvent.wrap(LTmpCurrentMotionEvent);
-  if (LCurrentMotionEvent.getPointerCount = 0) or
-     (LCurrentMotionEvent.getActionMasked <> AMOTION_EVENT_ACTION_UP) then exit;
-  //--
-  var LMovement: TMovement;
-  if TOSVersion.Check(14) {API level >= 34 (UPSIDE_DOWN_CAKE)} then
-    LMovement.eventTime := LCurrentMotionEvent.getEventTimeNanos
-  else
-    LMovement.eventTime := LCurrentMotionEvent.getEventTime*ALNanosPerMs;
-  LMovement.position := PlatformAndroid.WindowService.PixelToPoint(
-                          TPointF.Create(
-                            LCurrentMotionEvent.getX(0),
-                            LCurrentMotionEvent.getY(0)));
-  FMovements.Add(LMovement);
+//    exit;
+//  end;
+//  var LCurrentMotionEvent := TJALMotionEvent.wrap(LTmpCurrentMotionEvent);
+//  if (LCurrentMotionEvent.getPointerCount = 0) or
+//     (LCurrentMotionEvent.getActionMasked <> AMOTION_EVENT_ACTION_UP) then exit;
+//  --
+//  var LMovement: TMovement;
+//  if TOSVersion.Check(14) {API level >= 34 (UPSIDE_DOWN_CAKE)} then
+//    LMovement.eventTime := LCurrentMotionEvent.getEventTimeNanos
+//  else
+//    LMovement.eventTime := LCurrentMotionEvent.getEventTime*ALNanosPerMs;
+//  LMovement.position := PlatformAndroid.WindowService.PixelToPoint(
+//                          TPointF.Create(
+//                            LCurrentMotionEvent.getX(0),
+//                            LCurrentMotionEvent.getY(0)));
+//  FMovements.Add(LMovement);
   {$ENDIF}
   {$IF defined(IOS)}
   var LTmpCurrentTouchEvent := WindowHandleToPlatform(AHandle).CurrentTouchEvent;

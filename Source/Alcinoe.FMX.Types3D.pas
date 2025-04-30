@@ -329,10 +329,10 @@ end;
 {$IF defined(ANDROID)}
 procedure ALInitializeExternalOESTexture(const Texture: TTexture);
 begin
-  Texture.Material := ALGetDefExternalOESMaterial;
-  Texture.Style := Texture.Style + [TTextureStyle.External] - [TTextureStyle.MipMaps]; // GL_TEXTURE_EXTERNAL_OES does not support mipmaps
-  if Texture.PixelFormat = TPixelFormat.None then Texture.PixelFormat := TCustomAndroidContext.PixelFormat;
-  Texture.Initialize;
+//  Texture.Material := ALGetDefExternalOESMaterial;
+//  Texture.Style := Texture.Style + [TTextureStyle.External] - [TTextureStyle.MipMaps]; // GL_TEXTURE_EXTERNAL_OES does not support mipmaps
+//  if Texture.PixelFormat = TPixelFormat.None then Texture.PixelFormat := TCustomAndroidContext.PixelFormat;
+//  Texture.Initialize;
 end;
 {$ENDIF}
 

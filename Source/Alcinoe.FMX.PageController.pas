@@ -407,7 +407,7 @@ type
         procedure DoDeleteChildren; override;
         procedure DoContentChanged; override;
         {$IFNDEF ALDPK}
-        function IsVisibleObject(const AObject: TControl): Boolean; override;
+//        function IsVisibleObject(const AObject: TControl): Boolean; override;
         {$ENDIF}
       public
         constructor Create(AOwner: TComponent); override;
@@ -490,10 +490,10 @@ type
     procedure MouseUp(Button: TMouseButton; Shift: TShiftState; X, Y: Single); override;
     procedure DoMouseLeave; override;
     {$IFNDEF ALDPK}
-    procedure ChildrenMouseDown(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single); override;
-    procedure ChildrenMouseMove(const AObject: TControl; Shift: TShiftState; X, Y: Single); override;
-    procedure ChildrenMouseUp(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single); override;
-    procedure ChildrenMouseLeave(const AObject: TControl); override;
+//    procedure ChildrenMouseDown(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single); override;
+//    procedure ChildrenMouseMove(const AObject: TControl; Shift: TShiftState; X, Y: Single); override;
+//    procedure ChildrenMouseUp(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single); override;
+//    procedure ChildrenMouseLeave(const AObject: TControl); override;
     {$ENDIF}
   public
     constructor Create(AOwner: TComponent); override;
@@ -1560,6 +1560,7 @@ end;
 
 {*************}
 {$IFNDEF ALDPK}
+{
 function TALPageController.TContent.IsVisibleObject(const AObject: TControl): Boolean;
 begin
 
@@ -1579,6 +1580,7 @@ begin
     result := False;
 
 end;
+}
 {$ENDIF}
 
 {**************************************************************************}
@@ -2659,7 +2661,8 @@ Type
   _TControlAccessProtected = class(Tcontrol);
 
 {*************}
-{$IFNDEF ALDPK}
+//{$IFNDEF ALDPK}
+(*
 procedure TALPageController.ChildrenMouseDown(const AObject: TControl; Button: TMouseButton; Shift: TShiftState; X, Y: Single);
 begin
   if not aObject.AutoCapture then begin
@@ -2712,7 +2715,7 @@ begin
   inherited;
 end;
 {$ENDIF}
-
+*)
 {*************************************************************************}
 function TALPageController.NextPage(ATransition: TPageTransition): Boolean;
 begin
